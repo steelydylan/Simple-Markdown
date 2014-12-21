@@ -13,3 +13,4 @@ HTML CSS JavaScriptから出来ています。
 - ctrl + s　保存
 - ctrl + o　ファイルを開く
 - ctrl + n　新規作成
+- ctrl + shift + s　名前を付けて保存

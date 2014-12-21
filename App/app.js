@@ -39,17 +39,25 @@ $(function(){
 	});
 	$("#mdImporter").change(function(e){
 		var file = $(this).prop("files")[0];
+		var path = $(this).val();
+		var dir = path.substring(0,path.lastIndexOf("/")+1);
+		var filename = path.replace(/^.*[\\\/]/, '');
 		var fr = new FileReader();
+		var $exporter = $("#mdExporter");
+		$exporter.attr("nwsaveas",filename);
+		$exporter.attr("nwworkingdir",dir);
+		$("title").text(filename);
 		fr.onload = function(){
 			$("#src").val(fr.result);
 			$("#src").trigger("change");
+			$exporter.data("selected",true);
 		}
 		fr.readAsText(file); 
 	});
 	$(window).keydown(function(e){
 		if(e.keyCode == 83 && e.metaKey){
 			var $exporter = $("#mdExporter");
-			if($exporter.data("selected")){
+			if($exporter.data("selected") && !e.shiftKey){
 				var nwsaveas = $exporter.attr("nwsaveas");
 				var nwworkingdir = $exporter.attr("nwworkingdir");
 				fs.writeFileSync(nwworkingdir+nwsaveas,$("#src").val());
