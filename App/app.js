@@ -1,4 +1,9 @@
 $(function(){
+	var gui = require('nw.gui');
+	win = gui.Window.get();
+	var nativeMenuBar = new gui.Menu({ type: "menubar" });
+	nativeMenuBar.createMacBuiltin("Simple Markdown");
+	win.menu = nativeMenuBar;
 	var fs = require("fs");
 	var converter = new Showdown.converter();
 	$("#src").on('change keyup paste',function(){
@@ -18,7 +23,8 @@ $(function(){
 	});
 	$("#mdExporter").change(function(e){
 		var path = $(this).val();
-		if(path && fs.existsSync(path)){
+		var dir = path.substring(0,path.lastIndexOf("/")+1);
+		if(path && dir != "/Users/"){
 			fs.writeFile(path,$("#src").val(),function(err){
 				if(err){
 					throw err;
