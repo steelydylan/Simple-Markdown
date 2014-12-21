@@ -6,6 +6,8 @@
 HTML CSS JavaScriptから出来ています。
 下のダウンロードリンクをクリックしてもらうことでお使いいただけます。
 
+![](https://raw.github.com/steelydylan/Simple-Markdown/master/screenShot.png)
+
 [Simple Markdown](http://github.com/steelydylan/Simple-Markdown/archive/master.zip)
 
 ##使い方
