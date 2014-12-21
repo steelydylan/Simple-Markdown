@@ -44,15 +44,17 @@ $(function(){
 		var filename = path.replace(/^.*[\\\/]/, '');
 		var fr = new FileReader();
 		var $exporter = $("#mdExporter");
-		$exporter.attr("nwsaveas",filename);
-		$exporter.attr("nwworkingdir",dir);
-		$("title").text(filename);
-		fr.onload = function(){
-			$("#src").val(fr.result);
-			$("#src").trigger("change");
-			$exporter.data("selected",true);
+		if(path){
+			$exporter.attr("nwsaveas",filename);
+			$exporter.attr("nwworkingdir",dir);
+			$("title").text(filename);
+			fr.onload = function(){
+				$("#src").val(fr.result);
+				$("#src").trigger("change");
+				$exporter.data("selected",true);
+			}
+			fr.readAsText(file); 
 		}
-		fr.readAsText(file); 
 	});
 	$(window).keydown(function(e){
 		if(e.keyCode == 83 && e.metaKey){
