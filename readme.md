@@ -1,7 +1,7 @@
 #Simple Markdown
 
 ---
-node-webkit製のデスクトップ用アプリ
+`node-webkit製`のデスクトップ用アプリ
 
 HTML CSS JavaScriptから出来ています。
 下のダウンロードリンクをクリックしてもらうことでお使いいただけます。
@@ -12,3 +12,4 @@ HTML CSS JavaScriptから出来ています。
 
 - ctrl + s　保存
 - ctrl + o　ファイルを開く
+- ctrl + n　新規作成

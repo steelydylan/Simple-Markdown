@@ -6,10 +6,14 @@ $(function(){
 	win.menu = nativeMenuBar;
 	var fs = require("fs");
 	var converter = new Showdown.converter();
+	var data = "";
 	$("#src").on('change keyup paste',function(){
 		var text = $(this).val();
 		var html = converter.makeHtml(text);
 		$("#dist").html(html);
+		if(data != $(this).val() && $("#mdExporter").data("selected")){
+			$("title").text($("#mdExporter").attr("nwsaveas")+"*");
+		}
 	});
 	$("#src").keydown(function(e){
 		if (e.keyCode === 9) {
@@ -24,14 +28,14 @@ $(function(){
 	$("#mdExporter").change(function(e){
 		var path = $(this).val();
 		var dir = path.substring(0,path.lastIndexOf("/")+1);
+		var filename = path.replace(/^.*[\\\/]/, '');
 		if(path && dir != "/Users/"){
-			fs.writeFile(path,$("#src").val(),function(err){
-				if(err){
-					throw err;
-				}
-			});
+			fs.writeFileSync(path,$("#src").val());
+			$(this).attr("nwsaveas",filename);
+			$(this).attr("nwworkingdir",dir);
+			$(this).data("selected",true);
+			$("title").text(filename);
 		}
-		$(this).val("");
 	});
 	$("#mdImporter").change(function(e){
 		var file = $(this).prop("files")[0];
@@ -44,10 +48,22 @@ $(function(){
 	});
 	$(window).keydown(function(e){
 		if(e.keyCode == 83 && e.metaKey){
-			$("#mdExporter").click();
+			var $exporter = $("#mdExporter");
+			if($exporter.data("selected")){
+				var nwsaveas = $exporter.attr("nwsaveas");
+				var nwworkingdir = $exporter.attr("nwworkingdir");
+				fs.writeFileSync(nwworkingdir+nwsaveas,$("#src").val());
+				data = $("#src").val();
+				$("title").text(nwsaveas);
+			}else{
+				$exporter.click();
+			}
 		}
 		if(e.keyCode == 79 && e.metaKey){
 			$("#mdImporter").click();
+		}
+		if(e.keyCode == 78 && e.metaKey){
+			window.open("./index.html");
 		}
 	});
 });
