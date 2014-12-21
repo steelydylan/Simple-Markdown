@@ -76,4 +76,10 @@ $(function(){
 			window.open("./index.html");
 		}
 	});
+	gui.Window.get().on('close', function() {
+        var r = confirm("編集しているファイルは保存されていません。このままウィンドウを閉じますか？");
+        if (r) {
+            this.close(true);
+        } 
+    });
 });
