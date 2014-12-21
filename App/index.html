@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Markdown</title>
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <style>
+      .container{
+        height:100vh;
+        overflow-y:hidden;
+      }
+    	#src{
+    		width:100%;
+    		height: 100vh;
+    		border:none;
+        resize: none;
+    	}
+      #dist{
+          height:100vh;
+          overflow:scroll;
+      }
+      #src:focus{
+        outline: none;
+      }
+      .codingArea{
+        height: 100%;
+        border-right: 1px solid #666666;
+      }
+    </style>
+    <script src="jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="showdown.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body>
+  	<div class="container">
+	  	<div class="row">
+	  		<div class="col-xs-6 codingArea">
+	   			<textarea id="src" tabindex="-1"></textarea>
+	   		</div>
+	   		<div class="col-xs-6">
+			   	<div id="dist">
+			   	</div>   			
+	   		</div>
+	   	</div>
+   	</div>
+    <input type="file" id="mdExporter" nwsaveas="untitled.md" nwworkingdir="/Users/" accept=".md" style="display:none" />
+    <input type="file" id="mdImporter" style="display:none" />
+  </body>
+</html>
